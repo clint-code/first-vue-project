@@ -1,13 +1,37 @@
 <script setup>
+
 import WelcomeItem from './WelcomeItem.vue'
 import DocumentationIcon from './icons/IconDocumentation.vue'
 import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
+import { ref } from 'vue';
+
+const text = ref('');
+
+// function onInput(e){
+//   text.value = e.target.value
+// }
+
+const count = ref(0);
+
+function increment(){
+  count.value++
+}
+
+const awesome = ref(true);
+
+function toggle(){
+
+  awesome.value = !awesome.value;
+
+}
+
 </script>
 
 <template>
+
   <WelcomeItem>
 
     <template #icon>
@@ -19,6 +43,17 @@ import SupportIcon from './icons/IconSupport.vue'
     Vue’s
     <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
     provides you with all information you need to get started.
+
+    <!--  
+        v-model directive automatically syncs the input value
+        with the bound state with no need
+        to use an event handler
+    -->
+    <input v-model="text" @input="onInput" type="text" placeholder="Type here">
+    <!-- <input :value="text" @input="onInput" placeholder="Type here"> -->
+
+    <p>{{ text }}</p>
+
 
   </WelcomeItem>
 
@@ -43,6 +78,9 @@ import SupportIcon from './icons/IconSupport.vue'
     <br />
 
     More instructions are available in <code>README.md</code>.
+    
+    <button @click="increment">Count is: {{ count }}</button>
+
   </WelcomeItem>
 
   <WelcomeItem>
@@ -77,6 +115,12 @@ import SupportIcon from './icons/IconSupport.vue'
     the official
     <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">@vuejs</a>
     twitter account for latest news in the Vue world.
+
+    <button @click="toggle">Toggle state</button>
+    <h1 v-if="awesome">Vue is magic!</h1>
+    <h1 v-else>Oh no 😢</h1>
+
+
   </WelcomeItem>
 
   <WelcomeItem>
@@ -89,4 +133,5 @@ import SupportIcon from './icons/IconSupport.vue'
     us by
     <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
   </WelcomeItem>
+
 </template>

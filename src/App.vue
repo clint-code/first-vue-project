@@ -1,20 +1,35 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue';
+
+const message = ref('erised straeh ruoy tub ecaf ruoy ton wohs I');
+
+const titleClass = ref('title');
+
 </script>
 
 <template>
+
   <header>
+
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it! Woohoo!" />
+      
+      <HelloWorld />
+      <h1>{{ message.split('').reverse().join('') }}</h1>
+      <h1 :class="titleClass">Make me red</h1>
+      
+
     </div>
+
   </header>
 
   <main>
     <TheWelcome />
   </main>
+
 </template>
 
 <style scoped>
@@ -25,6 +40,10 @@ header {
 .logo {
   display: block;
   margin: 0 auto 2rem;
+}
+
+.title {
+  color:red;
 }
 
 @media (min-width: 1024px) {
