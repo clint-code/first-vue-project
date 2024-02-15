@@ -6,7 +6,7 @@ import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const text = ref('');
 
@@ -27,6 +27,56 @@ function toggle(){
   awesome.value = !awesome.value;
 
 }
+
+let id = 0;
+
+const newBook = ref('')
+const hideCompleted = ref(false);
+const books = ref ([
+  { 
+    id: id++,
+    text: 'The Hobbit',
+    done: true
+  },
+  { 
+    id: id++,
+    text: 'The Lord of The Rings: The Fellowship of the Ring',
+    done: true
+  },
+  { 
+    id: id++,
+    text: 'The Lord of The Rings: The Two Towers',
+    done: false
+  },
+  { 
+    id: id++,
+    text: 'The Silmarilion',
+    done: false
+  }
+])
+
+function addNewBook(){
+  if(newBook.value !== ''){
+    books.value.push({ id: id++, text: newBook.value });
+    newBook.value = ''
+  }
+}
+
+function removeBook(){
+  // books.value = books.value.filter((b) => b !== book)
+  //console.log("Book removed:", books.value);
+  console.log("You have clicked me!");
+}
+
+// const completedBooks = computed(() => {
+//     return books.value.filter((b) => b !== books)
+// })
+
+
+
+const readBooks = computed(() => {
+  return hideCompleted.value ? books.value.filter((b) => !b.done) : books.value
+})
 
 </script>
 
@@ -124,14 +174,41 @@ function toggle(){
   </WelcomeItem>
 
   <WelcomeItem>
+
     <template #icon>
       <SupportIcon />
     </template>
+
     <template #heading>Support Vue</template>
 
     As an independent project, Vue relies on community backing for its sustainability. You can help
-    us by
-    <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
+    us by <a href1 ="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
+
+    <form @submit.prevent="addNewBook">
+      <input v-model="newBook">
+      <button>Add Book</button>
+    </form>
+
+    <ol>
+      <li v-for = "book in readBooks" :key="book.id">
+        <input type="checkbox" v-model="book.done">
+        <span :class="{done: book.done }">{{ book.text }}</span>
+        <button @cilck="removeBook">X</button>
+      </li>
+    </ol>
+
+    <button @click="hideCompleted = !hideCompleted">
+      {{ hideCompleted ? 'Show all' : 'Hide completed' }}
+    </button>
+
   </WelcomeItem>
 
 </template>
+
+<style>
+
+  .done{
+    text-decoration: line-through;
+  }
+
+</style>
