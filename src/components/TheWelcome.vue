@@ -6,7 +6,7 @@ import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 
 const text = ref('');
 
@@ -34,7 +34,7 @@ const newBook = ref('')
 const hideCompleted = ref(false);
 const books = ref ([
   { 
-    id: id++,
+    id: id,
     text: 'The Hobbit',
     done: true
   },
@@ -57,30 +57,79 @@ const books = ref ([
 
 function addNewBook(){
   if(newBook.value !== ''){
-    books.value.push({ id: id++, text: newBook.value });
+    books.value.push({ id: id, text: newBook.value, done : false });
     newBook.value = ''
   }
+
+  console.log("New added book:", books)
 }
 
-function removeBook(){
-  // books.value = books.value.filter((b) => b !== book)
-  //console.log("Book removed:", books.value);
-  console.log("You have clicked me!");
+function removeBook(book){
+  books.value = books.value.filter((b) => b !== book)
+  console.log("Updated array of books:", books.value);
+  console.log("Removed book:", book.text);
 }
-
-// const completedBooks = computed(() => {
-//     return books.value.filter((b) => b !== books)
-// })
-
-
 
 const readBooks = computed(() => {
   return hideCompleted.value ? books.value.filter((b) => !b.done) : books.value
 })
 
+const pElementRef = ref(null);
+
+onMounted(() => {
+  pElementRef.value.textContent = "This is awesome!"
+  console.log(pElementRef.value.textContent)
+})
+
+const todoId = ref(1)
+const todoData = ref(null)
+
+async function fetchData() {
+
+  todoData.value = null
+
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+  )
+
+  todoData.value = await res.json()
+
+}
+
+fetchData()
+
+/*
+  watch() has two arguments: the source and the callback
+  that's called when the source changes
+*/
+
+watch(todoId, fetchData) 
+
 </script>
 
 <template>
+
+<WelcomeItem>
+
+  <template #icon>
+    <DocumentationIcon />
+  </template>
+
+  <template #heading>Using watchers to get the Todo list, on clicking the button:</template>
+
+  <p>Todo id: {{ todoId }}</p>
+
+  <button @click="todoId++" :disabled="!todoData">Fetch next todo item</button>
+
+  <div v-if="!todoData">
+    <p>Loading...</p>
+  </div>
+
+  <pre v-else> {{ todoData }}</pre>
+
+  <p>The Todo list item is: <u>{{ todoData.title }}</u></p>
+      
+</WelcomeItem>
 
   <WelcomeItem>
 
@@ -193,7 +242,7 @@ const readBooks = computed(() => {
       <li v-for = "book in readBooks" :key="book.id">
         <input type="checkbox" v-model="book.done">
         <span :class="{done: book.done }">{{ book.text }}</span>
-        <button @cilck="removeBook">X</button>
+        <button @click="removeBook(book)">X</button>
       </li>
     </ol>
 
@@ -201,13 +250,31 @@ const readBooks = computed(() => {
       {{ hideCompleted ? 'Show all' : 'Hide completed' }}
     </button>
 
-  </WelcomeItem>
+  </WelcomeItem>  
+
+  <WelcomeItem>
+
+    <template #icon>
+      <DocumentationIcon />
+    </template>
+
+    <template #heading>Documentation</template>
+
+    Vue’s
+    <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
+    provides you with all information you need to get started.
+
+    <h2>Template Ref</h2>
+
+    <p ref="pElementRef">hello</p>
+
+</WelcomeItem>
 
 </template>
 
 <style>
 
-  .done{
+  .done {
     text-decoration: line-through;
   }
 

@@ -7,6 +7,7 @@ const message = ref('erised straeh ruoy tub ecaf ruoy ton wohs I');
 
 const titleClass = ref('title');
 
+//const count = ref(0);
 </script>
 
 <template>
@@ -19,8 +20,7 @@ const titleClass = ref('title');
       
       <HelloWorld />
       <h1>{{ message.split('').reverse().join('') }}</h1>
-      <h1 :class="titleClass">Make me red</h1>
-      
+      <h1 :class="titleClass">Make me red</h1>      
 
     </div>
 
@@ -29,8 +29,11 @@ const titleClass = ref('title');
   <main>
     <TheWelcome />
   </main>
+ 
 
 </template>
+
+
 
 <style scoped>
 header {
