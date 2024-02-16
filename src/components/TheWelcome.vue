@@ -6,13 +6,10 @@ import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue'
+//import axios from 'axios'
 
 const text = ref('');
-
-// function onInput(e){
-//   text.value = e.target.value
-// }
 
 const count = ref(0);
 
@@ -96,6 +93,20 @@ async function fetchData() {
 
 }
 
+// new Vue({
+//   el: '#app',
+//   data () {
+//     return {
+//       info: null
+//     }
+//   },
+//   mounted () {
+//     axios
+//       .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+//       .then(response => (this.info = response))
+//   }
+// })
+
 fetchData()
 
 /*
@@ -104,6 +115,10 @@ fetchData()
 */
 
 watch(todoId, fetchData) 
+
+/**
+ * using axios to consume APIs
+ */
 
 </script>
 
@@ -126,8 +141,8 @@ watch(todoId, fetchData)
   </div>
 
   <pre v-else> {{ todoData }}</pre>
-
-  <p>The Todo list item is: <u>{{ todoData.title }}</u></p>
+<!-- 
+  <p>The Todo list item is: <u>{{ todoData.title }}</u></p> -->
       
 </WelcomeItem>
 
@@ -183,9 +198,11 @@ watch(todoId, fetchData)
   </WelcomeItem>
 
   <WelcomeItem>
+
     <template #icon>
       <EcosystemIcon />
     </template>
+
     <template #heading>Ecosystem</template>
 
     Get official tools and libraries for your project:
@@ -196,6 +213,16 @@ watch(todoId, fetchData)
     you need more resources, we suggest paying
     <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">Awesome Vue</a>
     a visit.
+
+    <!-- <div id="app">
+      <h3>Bitcoin Price Index</h3>
+      
+      <section v-if="errored">
+        <p>We're sorry, we're not able to retrieve this information at the moment</p>
+      </section>
+
+    </div> -->
+
   </WelcomeItem>
 
   <WelcomeItem>

@@ -1,13 +1,12 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const message = ref('erised straeh ruoy tub ecaf ruoy ton wohs I');
 
 const titleClass = ref('title');
 
-//const count = ref(0);
 </script>
 
 <template>
