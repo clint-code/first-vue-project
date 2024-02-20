@@ -56,9 +56,9 @@ function addNewBook(){
   if(newBook.value !== ''){
     books.value.push({ id: id, text: newBook.value, done : false });
     newBook.value = ''
+    console.log("New added book:", books)
   }
 
-  console.log("New added book:", books)
 }
 
 function removeBook(book){
@@ -75,7 +75,6 @@ const pElementRef = ref(null);
 
 onMounted(() => {
   pElementRef.value.textContent = "This is awesome!"
-  console.log(pElementRef.value.textContent)
 })
 
 const todoId = ref(1)
