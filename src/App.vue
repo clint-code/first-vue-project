@@ -17,7 +17,7 @@ const parentMsg  = ref('Hello message from parent to child using props')
 
 const childMsg = ref('No child message yet')
 
-const clickMsg = ref('')
+const clickCountMsg = ref('')
 
 </script>
 
@@ -40,11 +40,9 @@ const clickMsg = ref('')
 
       <h1 :class="titleClass">Make me red</h1>      
 
-      <!-- <MyButton @click="buttonClick" /> -->
-
-      <MyButton @click="buttonClick" />
-      <p :class="messageClass">{{ clickMsg }}</p>
-
+      <!--Child button component emitting the count to the parent -->
+      <MyButton @response="(count) => clickCountMsg = count" />
+      <p :class="messageClass">{{ clickCountMsg }}</p>
 
     </div>
 
@@ -55,7 +53,6 @@ const clickMsg = ref('')
   </main> 
 
 </template>
-
 
 
 <style scoped>
