@@ -92,20 +92,6 @@ async function fetchData() {
 
 }
 
-// new Vue({
-//   el: '#app',
-//   data () {
-//     return {
-//       info: null
-//     }
-//   },
-//   mounted () {
-//     axios
-//       .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-//       .then(response => (this.info = response))
-//   }
-// })
-
 fetchData()
 
 /*
@@ -165,8 +151,7 @@ watch(todoId, fetchData)
     <input v-model="text" @input="onInput" type="text" placeholder="Type here">
     <!-- <input :value="text" @input="onInput" placeholder="Type here"> -->
 
-    <p>{{ text }}</p>
-
+    <p class="messageText">{{ text }}</p>
 
   </WelcomeItem>
 
@@ -292,7 +277,7 @@ watch(todoId, fetchData)
 
     <h2>Template Ref</h2>
 
-    <p ref="pElementRef">hello</p>
+    <p ref="pElementRef"></p>
 
 </WelcomeItem>
 
@@ -302,6 +287,10 @@ watch(todoId, fetchData)
 
   .done {
     text-decoration: line-through;
+  }
+
+  .messageText {
+    color: #41B883;
   }
 
 </style>

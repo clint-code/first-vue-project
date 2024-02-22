@@ -4,6 +4,7 @@ import TheWelcome from './components/TheWelcome.vue'
 import ChildComp from './components/ChildComp.vue';
 import AnotherChildComp from './components/AnotherChildComp.vue';
 import MyButton from './components/MyButton.vue'
+import ChildSlotComp from './components/ChildSlotComp.vue';
 
 import { ref } from 'vue'
 
@@ -18,6 +19,8 @@ const parentMsg  = ref('Hello message from parent to child using props')
 const childMsg = ref('No child message yet')
 
 const clickCountMsg = ref('')
+
+const theMessage = ref('from parent')
 
 </script>
 
@@ -37,6 +40,10 @@ const clickCountMsg = ref('')
 
       <AnotherChildComp @response="(msg) => childMsg = msg" />
       <p :class="messageClass">{{ childMsg }}</p>
+
+      <ChildSlotComp>
+        Message: {{ theMessage }}
+      </ChildSlotComp>
 
       <h1 :class="titleClass">Make me red</h1>      
 
