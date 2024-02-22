@@ -19,11 +19,11 @@ function decreaseCount(){
 
 <template>
 
-    <button @click="increaseCount">
+    <button class="p-button" @click="increaseCount">
         Increase by 1  
     </button>
 
-    <button @click="decreaseCount">
+    <button class="p-button" @click="decreaseCount">
         Decrease by 1  
     </button>
 

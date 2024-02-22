@@ -99,11 +99,7 @@ fetchData()
   that's called when the source changes
 */
 
-watch(todoId, fetchData) 
-
-/**
- * using axios to consume APIs
- */
+watch(todoId, fetchData)
 
 </script>
 
@@ -119,7 +115,7 @@ watch(todoId, fetchData)
 
   <p>Todo id: {{ todoId }}</p>
 
-  <button @click="todoId++" :disabled="!todoData">Fetch next todo item</button>
+  <button class="p-button" @click="todoId++" :disabled="!todoData">Fetch next todo item</button>
 
   <div v-if="!todoData">
     <p>Loading...</p>
@@ -144,11 +140,11 @@ watch(todoId, fetchData)
     provides you with all information you need to get started.
 
     <!--  
-        v-model directive automatically syncs the input value
+        v-model directive automatically syncs the InputText value
         with the bound state with no need
         to use an event handler
     -->
-    <input v-model="text" @input="onInput" type="text" placeholder="Type here">
+    <InputText v-model="text" @input="onInput" type="text" placeholder="Type here" />
     <!-- <input :value="text" @input="onInput" placeholder="Type here"> -->
 
     <p class="messageText">{{ text }}</p>
@@ -177,7 +173,7 @@ watch(todoId, fetchData)
 
     More instructions are available in <code>README.md</code>.
     
-    <button @click="increment">Count is: {{ count }}</button>
+    <button class="p-button" @click="increment">Count is: {{ count }}</button>
 
   </WelcomeItem>
 
@@ -210,9 +206,11 @@ watch(todoId, fetchData)
   </WelcomeItem>
 
   <WelcomeItem>
+
     <template #icon>
       <CommunityIcon />
     </template>
+
     <template #heading>Community</template>
 
     Got stuck? Ask your question on
@@ -226,7 +224,7 @@ watch(todoId, fetchData)
     <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">@vuejs</a>
     twitter account for latest news in the Vue world.
 
-    <button @click="toggle">Toggle state</button>
+    <button class="p-button" @click="toggle">Toggle state</button>
     <h1 v-if="awesome">Vue is magic!</h1>
     <h1 v-else>Oh no 😢</h1>
 
@@ -245,19 +243,19 @@ watch(todoId, fetchData)
     us by <a href1 ="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
 
     <form @submit.prevent="addNewBook">
-      <input v-model="newBook">
-      <button>Add Book</button>
+      <InputText v-model="newBook" />
+      <button class="p-button">Add Book</button>
     </form>
 
     <ol>
       <li v-for = "book in readBooks" :key="book.id">
-        <input type="checkbox" v-model="book.done">
+        <input type="checkbox" v-model="book.done" />
         <span :class="{done: book.done }">{{ book.text }}</span>
-        <button @click="removeBook(book)">X</button>
+        <button class="p-button" @click="removeBook(book)">X</button>
       </li>
     </ol>
 
-    <button @click="hideCompleted = !hideCompleted">
+    <button class="p-button" @click="hideCompleted = !hideCompleted">
       {{ hideCompleted ? 'Show all' : 'Hide completed' }}
     </button>
 

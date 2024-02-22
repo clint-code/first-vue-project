@@ -22,6 +22,10 @@ const clickCountMsg = ref('')
 
 const theMessage = ref('from parent')
 
+function reverseMessage(){
+  message.value = message.value.split('').reverse().join('')
+}
+
 </script>
 
 <template>
@@ -34,7 +38,8 @@ const theMessage = ref('from parent')
       
       <HelloWorld />
 
-      <h1>{{ message.split('').reverse().join('') }}</h1>
+      <button class="p-button" @click="reverseMessage">Reverse message</button>
+      <h1>{{ message }}</h1>
       
       <ChildComp :msg="parentMsg" :class="messageClass" />
 
